@@ -1,0 +1,5 @@
+
+GOPATH="$HOME/go"
+PATH="$HOME/.cargo/bin:$GOPATH/bin:/usr/local/go/bin:$PATH"
+export GOPATH PATH
+

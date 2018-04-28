@@ -1,0 +1,4 @@
+config fastestmirror True
+install @development-tools
+install wget python vim tmux git llvm-libs curl jq
+clean all
