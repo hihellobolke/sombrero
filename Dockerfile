@@ -19,7 +19,11 @@ RUN curl https://sh.rustup.rs -sSf -o /bin/rustup-init \
 
 RUN curl https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz -qLs -o /tmp/go.tar.gz \
     && tar -C /usr/local -xzf /tmp/go.tar.gz \
-    && go get -u github.com/justjanne/powerline-go
+    && /usr/local/go/bin/go get -u github.com/justjanne/powerline-go
+
+RUN curl -s https://install.zerotier.com/ -o /bin/zerotier-init -q -L -sS \
+    && chmod 755 /bin/zerotier-init \
+    && /bin/zerotier-init
 
 RUN rm -rf /tmp/*
 
