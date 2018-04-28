@@ -3,8 +3,10 @@ LABEL maintainer="hihellobolke@gmail.com"
 
 
 COPY files /tmp/files
-RUN dnf -y shell /tmp/files/dnf-transaction.txt \
-    && cat /tmp/files/profile >> /etc/profile \
+RUN dnf -y shell /tmp/files/dnf-transactions.txt \
+    && rm -rf /tmp/*
+
+RUN cat /tmp/files/profile >> /etc/profile \
     && cat /tmp/files/bashrc >> /home/.bashrc
 
 RUN cd /root \
@@ -20,6 +22,7 @@ RUN curl https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz -qLs -o /tmp/go.ta
     && tar -C /usr/local -xzf /tmp/go.tar.gz \
     && go get -u github.com/justjanne/powerline-go
 
+RUN rm -rf /tmp/*
 
 ENTRYPOINT ["bash"]
 CMD ["--login"]
