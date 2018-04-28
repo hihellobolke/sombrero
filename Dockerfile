@@ -23,7 +23,7 @@ RUN curl https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz -qLs -o /tmp/go.ta
 
 RUN curl -s https://install.zerotier.com/ -o /bin/zerotier-init -q -L -sS \
     && chmod 755 /bin/zerotier-init \
-    && /bin/zerotier-init
+    && /bin/zerotier-init || exit 0
 
 RUN rm -rf /tmp/*
 
