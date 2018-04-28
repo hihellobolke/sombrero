@@ -3,8 +3,7 @@ LABEL maintainer="hihellobolke@gmail.com"
 
 
 COPY files /tmp/files
-RUN dnf -y shell /tmp/files/dnf-transactions.txt \
-    && rm -rf /tmp/*
+RUN dnf -y shell /tmp/files/dnf-transactions.txt
 
 RUN cat /tmp/files/profile >> /etc/profile \
     && cat /tmp/files/bashrc >> /home/.bashrc
