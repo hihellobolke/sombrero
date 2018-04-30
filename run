@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PRG="$0"
+
+while [ -h "$PRG" ]; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+
+PRGDIR="$(cd $(dirname "$PRG") && pwd)"
+NAME=sombrero
+IMAGE="hihellobolke/sombrero:master"
+
+if [ ! "$(docker ps -q -f name=$NAME)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=$NAME)" ]; then
+        # cleanup
+        docker rm $NAME
+    fi
+    # run your container
+    exec docker run --rm -it --name sombrero -v $PRGDIR/ws:/ws hihellobolke/sombrero:master
+else
+    exec docker exec -it sombrero /bin/bash
+fi
+
